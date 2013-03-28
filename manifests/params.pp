@@ -18,6 +18,9 @@ class hosts::params {
   $dynamic_mode = false
   $dynamic_magicvar = ''
   $dynamic_template = ''
+  $dynamic_ip = $::ipaddress
+  $dynamic_alias = [ $::hostname ]
+  $dynamic_exclude = false
 
   ### Application related parameters
 

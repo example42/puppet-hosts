@@ -5,8 +5,36 @@
 #
 # == Parameters
 #
-# Standard class parameters
-# Define the general class behaviour and customizations
+# [*dynamic_mode*]
+#   Define if you want to enable dynamic mode (requires storedconfigs) where
+#   all the nodes of the Puppet infrastructure are automatically added in
+#   /etc/hosts. Note that if you set this to true you can't use the source
+#   or template parameters. Default: false
+#
+# [*dynamic_magicvar*]
+#   Name of a variable you can use to collect dynamically only the nodes
+#   that share the same value for tha variable.
+#   For example: if dynamic_magicvar=environment you will see in /etc/hosts
+#   only the nodes of the same environment. Default: ''
+#
+# [*dynamic_template*]
+#   Path to a template that you can use as common header for the /etc/hosts
+#   By default new hosts are added to the existing /etc/hosts, here you can
+#   set a common and custom template. Default: ''
+#
+# [*dynamic_ip*]
+#   Ip address to use in /etc/hosts entries. It can (should) be a variable
+#   Default: $::ip_address 
+#   Example: dynamic_ip => $::ec2_public_ipv4
+#
+# [*dynamic_alias*]
+#   Aliases to add to the /etc/hosts line. Default: [ $::hostname ]
+#   Should be an array
+#
+# [*dynamic_exclude*]
+#   Define if you want to exclude the current host from being automatically
+#   collected by the other nodes (May be used, for example for puppetmaster
+#   or cluster nodes, in certain situations)
 #
 # [*my_class*]
 #   Name of a custom class to autoload to manage module's customizations
@@ -58,6 +86,9 @@ class hosts (
   $dynamic_mode        = params_lookup( 'dynamic_mode' ),
   $dynamic_magicvar    = params_lookup( 'dynamic_magicvar' ),
   $dynamic_template    = params_lookup( 'dynamic_template' ),
+  $dynamic_ip          = params_lookup( 'dynamic_ip' ),
+  $dynamic_alias       = params_lookup( 'dynamic_alias' ),
+  $dynamic_exclude     = params_lookup( 'dynamic_exclude' ),
   $my_class            = params_lookup( 'my_class' ),
   $source              = params_lookup( 'source' ),
   $template            = params_lookup( 'template' ),
@@ -71,6 +102,7 @@ class hosts (
   $config_file_group=$hosts::params::config_file_group
 
   $bool_dynamic_mode=any2bool($dynamic_mode)
+  $bool_dynamic_exclude=any2bool($dynamic_exclude)
   $bool_audit_only=any2bool($audit_only)
   $bool_noops=any2bool($noops)
 
