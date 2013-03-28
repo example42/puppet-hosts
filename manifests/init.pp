@@ -75,6 +75,7 @@ class hosts (
   $config_file_owner=$hosts::params::config_file_owner
   $config_file_group=$hosts::params::config_file_group
 
+  $bool_dynamic_mode=any2bool($dynamic_mode)
   $bool_absent=any2bool($absent)
   $bool_audit_only=any2bool($audit_only)
   $bool_noops=any2bool($noops)
@@ -126,6 +127,11 @@ class hosts (
   ### Include custom class if $my_class is set
   if $hosts::my_class {
     include $hosts::my_class
+  }
+
+  ### Manage hosts dynamically
+  if $bool_dynamic_mode == true {
+    include hosts::dynamic
   }
 
 }
