@@ -2,9 +2,9 @@ class hosts::dynamic {
   $magic_tag = get_magicvar($hosts::dynamic_magicvar)
 
   @@host { $::fqdn:
-    ip           => $::ipaddress
+    ip           => $::ipaddress,
     host_aliases => [ $::hostname ],
-    tag          => "env-${::magic_tag}";
+    tag          => "env-${::magic_tag}",
   }
   
   Host <<| tag == "env-${magic_tag}" |>> {

@@ -24,10 +24,6 @@
 #   Note source and template parameters are mutually exclusive: don't use both
 #   Can be defined also by the (top scope) variable $hosts_template
 #
-# [*absent*]
-#   Set to 'true' to remove package(s) installed by module
-#   Can be defined also by the (top scope) variable $hosts_absent
-#
 # [*audit_only*]
 #   Set to 'true' if you don't intend to override existing configuration files
 #   and want to audit the difference between existing files and the ones
@@ -65,7 +61,6 @@ class hosts (
   $my_class            = params_lookup( 'my_class' ),
   $source              = params_lookup( 'source' ),
   $template            = params_lookup( 'template' ),
-  $absent              = params_lookup( 'absent' ),
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
   $noops               = params_lookup( 'noops' ),
   $config_file         = params_lookup( 'config_file' )
@@ -76,16 +71,10 @@ class hosts (
   $config_file_group=$hosts::params::config_file_group
 
   $bool_dynamic_mode=any2bool($dynamic_mode)
-  $bool_absent=any2bool($absent)
   $bool_audit_only=any2bool($audit_only)
   $bool_noops=any2bool($noops)
 
   ### Definition of some variables used in the module
-  $manage_file = $hosts::bool_absent ? {
-    true    => 'absent',
-    default => 'present',
-  }
-
   $manage_audit = $hosts::bool_audit_only ? {
     true  => 'all',
     false => undef,
@@ -111,12 +100,11 @@ class hosts (
 
   ### Managed resources
   file { 'hosts.conf':
-    ensure  => $hosts::manage_file,
+    ensure  => present,
     path    => $hosts::config_file,
     mode    => $hosts::config_file_mode,
     owner   => $hosts::config_file_owner,
     group   => $hosts::config_file_group,
-    require => Package[$hosts::package],
     source  => $hosts::manage_file_source,
     content => $hosts::manage_file_content,
     replace => $hosts::manage_file_replace,
