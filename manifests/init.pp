@@ -24,7 +24,7 @@
 #
 # [*dynamic_ip*]
 #   Ip address to use in /etc/hosts entries. It can (should) be a variable
-#   Default: $::ip_address 
+#   Default: $::ip_address
 #   Example: dynamic_ip => $::ec2_public_ipv4
 #
 # [*dynamic_alias*]
