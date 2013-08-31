@@ -45,6 +45,6 @@ class hosts::params {
   $source = ''
   $template = ''
   $audit_only = false
-  $noops = false
+  $noops = undef
 
 }

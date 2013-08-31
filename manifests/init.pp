@@ -62,7 +62,7 @@
 # [*noops*]
 #   Set noop metaparameter to true for all the resources managed by the module.
 #   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: false
+#   this to true. Default: undef
 #
 # Default class params - As defined in hosts::params.
 # Note that these variables are mostly defined and used in the module itself,
@@ -104,7 +104,6 @@ class hosts (
   $bool_dynamic_mode=any2bool($dynamic_mode)
   $bool_dynamic_exclude=any2bool($dynamic_exclude)
   $bool_audit_only=any2bool($audit_only)
-  $bool_noops=any2bool($noops)
 
   ### Definition of some variables used in the module
   $manage_audit = $hosts::bool_audit_only ? {
@@ -141,7 +140,7 @@ class hosts (
     content => $hosts::manage_file_content,
     replace => $hosts::manage_file_replace,
     audit   => $hosts::manage_audit,
-    noop    => $hosts::bool_noops,
+    noop    => $hosts::noops,
   }
 
   ### Include custom class if $my_class is set
