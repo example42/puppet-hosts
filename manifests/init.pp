@@ -92,6 +92,7 @@ class hosts (
   $my_class            = params_lookup( 'my_class' ),
   $source              = params_lookup( 'source' ),
   $template            = params_lookup( 'template' ),
+  $content             = params_lookup( 'content' ),
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
   $noops               = params_lookup( 'noops' ),
   $config_file         = params_lookup( 'config_file' )
@@ -121,12 +122,15 @@ class hosts (
     default   => $hosts::source,
   }
 
-  $manage_file_content = $hosts::template ? {
-    ''        => $hosts::dynamic_template ? {
-      ''      => undef,
-      default => $hosts::dynamic_template,
+  $manage_file_content = $hosts::content ? {
+    ''        => $hosts::template ? {
+      ''        => $hosts::dynamic_template ? {
+        ''      => undef,
+        default => $hosts::dynamic_template,
+      },
+      default   => template($hosts::template),
     },
-    default   => template($hosts::template),
+    default   => $hosts::content,
   }
 
   ### Managed resources
