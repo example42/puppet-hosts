@@ -84,15 +84,15 @@
 #
 class hosts (
   $dynamic_mode        = params_lookup( 'dynamic_mode' ),
-  $dynamic_magicvar    = params_lookup( 'dynamic_magicvar' ),
-  $dynamic_template    = params_lookup( 'dynamic_template' ),
+  $dynamic_magicvar    = params_lookup( 'dynamic_magicvar', undef ),
+  $dynamic_template    = params_lookup( 'dynamic_template', undef ),
   $dynamic_ip          = params_lookup( 'dynamic_ip' ),
   $dynamic_alias       = params_lookup( 'dynamic_alias' ),
   $dynamic_exclude     = params_lookup( 'dynamic_exclude' ),
-  $my_class            = params_lookup( 'my_class' ),
-  $source              = params_lookup( 'source' ),
-  $template            = params_lookup( 'template' ),
-  $content             = params_lookup( 'content' ),
+  $my_class            = params_lookup( 'my_class', undef ),
+  $source              = params_lookup( 'source', undef ),
+  $template            = params_lookup( 'template', undef ),
+  $content             = params_lookup( 'content', undef ),
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
   $noops               = params_lookup( 'noops' ),
   $config_file         = params_lookup( 'config_file' )
