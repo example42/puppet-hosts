@@ -13,8 +13,8 @@ class hosts::dynamic {
   }
 
   @@host { $::fqdn:
-    ip           => $dynamic_ip,
-    host_aliases => $dynamic_alias,
+    ip           => $hosts::dynamic_ip,
+    host_aliases => $hosts::dynamic_alias,
     tag          => $real_tag,
   }
 
