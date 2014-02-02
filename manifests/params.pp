@@ -37,6 +37,7 @@ class hosts::params {
   }
 
   $config_file_group = $::operatingsystem ? {
+    FreeBSD => 'wheel',
     default => 'root',
   }
 
