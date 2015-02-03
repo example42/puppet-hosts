@@ -59,10 +59,6 @@
 #   Can be defined also by the (top scope) variables $hosts_audit_only
 #   and $audit_only
 #
-# [*noops*]
-#   Set noop metaparameter to true for all the resources managed by the module.
-#   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: undef
 #
 # Default class params - As defined in hosts::params.
 # Note that these variables are mostly defined and used in the module itself,
@@ -94,7 +90,6 @@ class hosts (
   $template            = params_lookup( 'template' ),
   $content             = params_lookup( 'content' ),
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
-  $noops               = params_lookup( 'noops' ),
   $config_file         = params_lookup( 'config_file' )
   ) inherits hosts::params {
 
@@ -144,7 +139,6 @@ class hosts (
     content => $hosts::manage_file_content,
     replace => $hosts::manage_file_replace,
     audit   => $hosts::manage_audit,
-    noop    => $hosts::noops,
   }
 
   ### Include custom class if $my_class is set
