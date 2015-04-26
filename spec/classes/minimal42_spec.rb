@@ -14,11 +14,6 @@ describe 'hosts' do
     let(:params) { {:version => '1.0.42' } }
   end
 
-  describe 'Test noops mode' do
-    let(:params) { {:noops => true} }
-    it { should contain_file('hosts.conf').with_noop('true') }
-  end
-
   describe 'Test customizations - template' do
     let(:params) { {:template => "hosts/spec.erb" } }
     it 'should generate a valid template' do
