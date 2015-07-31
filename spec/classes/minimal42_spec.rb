@@ -4,7 +4,11 @@ describe 'hosts' do
 
   let(:title) { 'hosts' }
   let(:node) { 'rspec.example42.com' }
-  let(:facts) { { :ipaddress => '10.42.42.42' } }
+  let(:facts) { {
+      :ipaddress => '10.42.42.42',
+      :osfamily  => 'RedHat',
+      :operatingsystem => 'CentOS'
+  } }
 
   describe 'Test minimal installation' do
     it { should contain_file('hosts.conf').with_ensure('present') }
@@ -17,8 +21,9 @@ describe 'hosts' do
   describe 'Test customizations - template' do
     let(:params) { {:template => "hosts/spec.erb" } }
     it 'should generate a valid template' do
-      content = catalogue.resource('file', 'hosts.conf').send(:parameters)[:content]
-      content.should match "fqdn: rspec.example42.com"
+      should contain_file('hosts.conf').with_content(/fqdn: rspec.example42.com/)
+      #content = catalogue.resource('file', 'hosts.conf').send(:parameters)[:content]
+      #content.should match "fqdn: rspec.example42.com"
     end
   end
 
