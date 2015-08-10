@@ -1,4 +1,4 @@
-require "#{File.join(File.dirname(__FILE__),'..','spec_helper.rb')}"
+require 'spec_helper'
 
 describe 'hosts' do
 
@@ -19,7 +19,10 @@ describe 'hosts' do
   end
 
   describe 'Test customizations - template' do
-    let(:params) { {:template => "hosts/spec.erb" } }
+    let(:params) { {
+        :template => 'hosts/spec.erb',
+        :content => '',
+    } }
     it 'should generate a valid template' do
       should contain_file('hosts.conf').with_content(/fqdn: rspec.example42.com/)
       #content = catalogue.resource('file', 'hosts.conf').send(:parameters)[:content]
