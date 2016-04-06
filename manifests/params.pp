@@ -25,7 +25,8 @@ class hosts::params {
   ### Application related parameters
 
   $config_file = $::operatingsystem ? {
-    default => '/etc/hosts',
+    'Solaris' => '/etc/inet/hosts',
+    default   => '/etc/hosts',
   }
 
   $config_file_mode = $::operatingsystem ? {
