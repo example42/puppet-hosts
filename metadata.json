@@ -1,0 +1,21 @@
+{
+  "name": "example42-hosts",
+  "version": "2.0.18",
+  "summary": "Puppet module for hosts",
+  "author": "Alessandro Franceschi",
+  "description": "This module installs and manages hosts. Check README for details.",
+  "dependencies": [
+    {
+      "name": "example42/puppi",
+      "version_requirement": ">= 2.0.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+  },
+  "source": "https://github.com/example42/puppet-hosts",
+  "project_page": "http://www.example42.com",
+  "license": "Apache2"
+}
