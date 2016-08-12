@@ -1,6 +1,6 @@
 {
   "name": "example42-hosts",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "summary": "Puppet module for hosts",
   "author": "Alessandro Franceschi",
   "description": "This module installs and manages hosts. Check README for details.",
